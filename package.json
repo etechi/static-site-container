@@ -1,0 +1,47 @@
+{
+  "name": "multi-site-server",
+  "version": "0.0.5",
+  "description": "A simple static web servier for handling multiple sites with different domains.",
+  "keywords":["webserver","static content","express"],
+  "homepage":"https://github.com/etechi/static-site-container",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "author": { "name" : "Yang Chen"
+, "email" : "cy2000@gmail.com"
+, "url" : "https://github.com/etechi"
+},
+"repository":{ 
+  "type" : "git"
+  , "url" : "https://github.com/etechi/static-site-container.git"
+  },
+  "bin": {
+    "multi-site-server": "bin/server"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  
+  "dependencies": {
+    "commander": "^2.9.0",
+    "connect-gzip-static": "^1.0.0",
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
+    "vhost": "^3.0.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-istanbul": "^0.10.4",
+    "gulp-mocha": "^2.2.0",
+    "gulp-sourcemaps": "^2.0.0-alpha",
+    "gulp-tslint": "^5.0.0",
+    "gulp-typescript": "^2.13.3",
+    "run-sequence": "^1.1.5",
+    "superagent": "^1.8.3",
+    "tslint": "^3.9.0",
+    "typescript": "^1.8.10",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
