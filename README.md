@@ -1,7 +1,15 @@
 # static-site-container
-Sometimes there are multiple static sites for testing or internal using. 
-But we don't want to deploy multiple nodejs instances. 
+Sometimes there are multiple static sites for testing or development. 
+But we don't want to deploy multiple nodejs instances or other production web server like nginx. 
 So the static-site-cotnainer will help to handle this.
+
+## Features
+
+ * Support multiple sites on single node instance.
+ * Support multiple domains for each site.
+ * Support serve static gzipped file by connect-gzip-static.
+ * Support folder index page (index.htm or index.html).
+ * Support express router (Coming soon).  
 
 ## Install
 ```
