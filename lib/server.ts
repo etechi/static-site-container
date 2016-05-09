@@ -13,8 +13,6 @@ function main(){
         .usage('[options] <site path root...>')
         .option('-p, --port <n>', 'Add listen port [80]',s=>parseInt(s),80)
         .parse(process.argv);
-
-    console.log(program.args );
     
     if(!program.args || program.args.length!=1)
     {

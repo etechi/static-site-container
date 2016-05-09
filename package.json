@@ -1,6 +1,6 @@
 {
-  "name": "multi-site-server",
-  "version": "0.0.5",
+  "name": "static-site-container",
+  "version": "0.0.9",
   "description": "A simple static web servier for handling multiple sites with different domains.",
   "keywords":["webserver","static content","express"],
   "homepage":"https://github.com/etechi/static-site-container",
@@ -15,7 +15,7 @@
   , "url" : "https://github.com/etechi/static-site-container.git"
   },
   "bin": {
-    "multi-site-server": "bin/server"
+    "static-site-container": "bin/server"
   },
   "files": [
     "bin",

@@ -97,7 +97,6 @@ export function sub_site_create(root: string, cfg: SiteConfig): express.Express 
     return site;
 }
 export function site_container_add_site(container: express.Express, root: string) {
-    root=path.resolve(root);
     const sites_path = path.join(root, "sites");
     
     if (!fs.existsSync(sites_path)) return;
@@ -115,6 +114,7 @@ export function site_container_add_site(container: express.Express, root: string
 }
 
 export function site_container_create(root: string): express.Express {
+    root=path.resolve(root);
     const site = express();
     site_container_add_site(site, root);
     site_setup(site, root, load_config(root));

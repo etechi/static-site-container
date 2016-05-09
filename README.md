@@ -29,6 +29,21 @@ multiple-sites-root/
             
 ```
 
+## Site Config File
+
+static-site-container will read config file named site-config.json under site folder.  
+
+**Example**
+```
+ {
+    "public": "public",
+    "domains": ["www.abc.com","abc.com"],
+    "port": 80
+}
+
+```
+
+
 ## License
 
 MIT © [Yang Chen](https://github.com/etechi)
