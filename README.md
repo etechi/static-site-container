@@ -19,6 +19,7 @@ multiple site folder structure:
 multiple-sites-root/
     sites/
         www.abc.com/
+            site-config.json        
             public/
                 index.htm
                 ...

@@ -1,6 +1,6 @@
 {
   "name": "static-site-container",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A simple static web servier for handling multiple sites with different domains.",
   "keywords":["webserver","static content","express"],
   "homepage":"https://github.com/etechi/static-site-container",
