@@ -1,18 +1,23 @@
 {
   "name": "static-site-container",
-  "version": "0.0.11",
+  "version": "0.0.18",
   "description": "A simple static web servier for handling multiple sites with different domains.",
-  "keywords":["webserver","static content","express"],
-  "homepage":"https://github.com/etechi/static-site-container",
+  "keywords": [
+    "webserver",
+    "static content",
+    "express"
+  ],
+  "homepage": "https://github.com/etechi/static-site-container",
   "main": "lib/index.js",
   "license": "MIT",
-  "author": { "name" : "Yang Chen"
-, "email" : "cy2000@gmail.com"
-, "url" : "https://github.com/etechi"
-},
-"repository":{ 
-  "type" : "git"
-  , "url" : "https://github.com/etechi/static-site-container.git"
+  "author": {
+    "name": "Yang Chen",
+    "email": "cy2000@gmail.com",
+    "url": "https://github.com/etechi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/etechi/static-site-container.git"
   },
   "bin": {
     "static-site-container": "bin/server"
@@ -21,12 +26,13 @@
     "bin",
     "lib"
   ],
-  
   "dependencies": {
+    "body-parser": "^1.15.1",
     "commander": "^2.9.0",
     "connect-gzip-static": "^1.0.0",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.13.0",
     "vhost": "^3.0.2"
   },
   "devDependencies": {

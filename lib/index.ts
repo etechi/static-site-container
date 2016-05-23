@@ -6,20 +6,42 @@ import fs = require("fs");
 const exphbs = require("express-handlebars");
 const gzipStatic = require("connect-gzip-static");
 const vhost = require("vhost");
+const bodyParser = require('body-parser');
+const session= require('express-session');
+
 
 interface SiteConfig {
     public?: string;
     views?: string;
     viewsLayouts?: string;
+    viewsPartials?:string;
     defaultLayout?: string;
     routes?: string;
     domains?: string[];
     port?: number;
+    sessionStorage?(session:any):any;
 }
 export function site_set_router(site: express.Express, root: string, cfg: SiteConfig): void {
     const route_path = path.join(root, cfg.routes || "routes", "index.js");
     if (!fs.existsSync(route_path))
         return;
+    var sessStorage=null;
+    if(cfg.sessionStorage)
+        sessStorage=cfg.sessionStorage(session);
+        
+    site.set('trust proxy', 1) // trust first proxy
+    site.use(session({
+        name:'sess',
+        secret: 'WRS7*&^19!@lcIIhj~!12FQ1a[FQ]\\',
+        resave: false,
+        saveUninitialized: false,
+        store:sessStorage,
+        cookie: { /*secure: true*/ }
+    }));
+
+    site.use(bodyParser.urlencoded({ extended: true }));
+    site.use(bodyParser.json());
+
     const route = require(route_path);
     site.use(route(express.Router()));
 }
@@ -35,7 +57,8 @@ export function site_set_view_engine(site: express.Express, root: string, cfg: S
         exphbs({
             defaultLayout: cfg.defaultLayout || "main",
             extname: ".hbs",
-            layoutsDir: path.join(root, cfg.viewsLayouts || (view_path + "/layouts/"))
+            layoutsDir: path.join(root, cfg.viewsLayouts || (view_path + "/layouts/")),
+		    partialsDir: path.join(root, cfg.viewsPartials || (view_path + "/partials/"))
         })
     );
 }
@@ -68,13 +91,13 @@ export function site_set_static_root(site: express.Express, root: string, cfg: S
 
 export function site_setup(app: express.Express, root: string, cfg: SiteConfig): void {
     app.set("x-powered-by", false);
-
+    
     site_set_view_engine(app, root, cfg);
     site_set_router(app, root, cfg);
 
     site_set_static_root(app, root, cfg);
     site_set_static_index_file(app, root, cfg);
-
+        
     app.use((req, res, next) => {
         res.status(404);
         res.type("txt").send("Not found");
@@ -82,8 +105,18 @@ export function site_setup(app: express.Express, root: string, cfg: SiteConfig):
 }
 
 export function load_config(root: string): SiteConfig {
-    const cfg_file = path.join(root, "site-config.json");
-    const cfg = fs.existsSync(cfg_file) ? <SiteConfig>JSON.parse(fs.readFileSync(cfg_file, "utf8")) : {};
+    
+    var cfg:SiteConfig;
+    const cfg_script = path.join(root, "site-config.js");
+    if(fs.existsSync(cfg_script))
+        cfg=<SiteConfig>require(cfg_script);
+    else{   
+        const cfg_file = path.join(root, "site-config.json");
+        if(fs.existsSync(cfg_file))
+            cfg=<SiteConfig>JSON.parse(fs.readFileSync(cfg_file, "utf8"));
+        else
+            cfg={};
+    }
     return cfg;
 }
 export function site_create(root: string): express.Express {
